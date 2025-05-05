@@ -1,103 +1,126 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import { PlusCircle, LogIn, ShieldAlert } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
+export default async function LandingPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <main>
+        <div className="container mx-auto max-w-screen-xl py-6 md:py-8 px-4">
+          <div className="space-y-8">
+            <div className="text-center space-y-3">
+              <h1 className="text-4xl font-bold tracking-tight">
+                Application Template
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Clone this template to create your own application
+              </p>
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="grid gap-6 md:grid-cols-2 lg:gap-8 py-8">
+              <Card className="border-2 border-primary/20">
+                <CardHeader>
+                  <CardTitle>Form Submission</CardTitle>
+                  <CardDescription>
+                    Example form submission page
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p>
+                    Use form submission page to submit form data to the database
+                  </p>
+                  <Link href="/form-submission">
+                    <Button className="w-full">
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Form Submission
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Registered User Access</CardTitle>
+                  <CardDescription>
+                    Sign in to access additional features and track your reports
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p>
+                    Sign in to your account to access the full features of the
+                    application.
+                  </p>
+                  <Link href="/login">
+                    <Button variant="outline" className="w-full">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Sign In
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>About the OVA System</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p>
+                  This template is designed to help get you started with your
+                  own application. It is a simple and easy to use template that
+                  you can clone and use to create your own application.
+                </p>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="space-y-2">
+                    <h3 className="font-medium">Main Features</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Role based access control
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-medium">Additional Features</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Your own database, your own application
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-medium">Secure & Confidential</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Modern tech stack, modern design
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="border-t py-6 mt-auto">
+        <div className="container mx-auto max-w-screen-xl flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row md:py-0 px-4">
+          <p className="text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} Application Template. All rights
+            reserved.
+          </p>
+        </div>
       </footer>
-    </div>
+    </>
   );
 }

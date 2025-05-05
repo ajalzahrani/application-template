@@ -48,3 +48,4 @@ generated/prisma/
 
 # bun
 bun.lockb
+package-lock.json
