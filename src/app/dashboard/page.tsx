@@ -10,9 +10,10 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
+import { checkServerPermission } from "@/lib/server-permissions";
 
 export default async function DashboardPage() {
-  // Get occurrence counts
+  await checkServerPermission("manage:dashboards");
 
   return (
     <PageShell>

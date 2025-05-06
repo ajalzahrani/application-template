@@ -2,7 +2,7 @@ import { PrismaClient } from "../generated/prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
-const hashedPassword = await bcrypt.hash("password", 10);
+const hashedPassword = await bcrypt.hash("adminpassword", 10);
 
 async function main() {
   // Create roles
@@ -86,9 +86,14 @@ async function main() {
   const permissions = [
     // Admin permissions
     {
+      code: "admin:all",
+      name: "Manage All",
+      description: "Ability to view all pages",
+    },
+    {
       code: "manage:management",
-      name: "Manage Department",
-      description: "Ability to view department pages",
+      name: "Manage System",
+      description: "Ability to view management and users pages",
     },
     {
       code: "manage:users",
@@ -120,6 +125,11 @@ async function main() {
       code: "manage:reports",
       name: "Manage Reports",
       description: "Ability to view reports pages",
+    },
+    {
+      code: "manage:dashboards",
+      name: "Manage Dashboards",
+      description: "Ability to view dashboards pages",
     },
   ];
 
