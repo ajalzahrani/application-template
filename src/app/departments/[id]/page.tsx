@@ -1,8 +1,7 @@
-import { DashboardShell } from "@/components/dashboard/dashboard-shell";
-import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { PageShell } from "@/components/page-shell";
+import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
@@ -25,8 +24,8 @@ export default async function DepartmentPage({
   }
 
   return (
-    <DashboardShell>
-      <DashboardHeader
+    <PageShell>
+      <PageHeader
         heading={`${department.department?.name} Department`}
         text="Manage department">
         <div className="flex gap-2">
@@ -42,7 +41,7 @@ export default async function DepartmentPage({
             </Link>
           </Button>
         </div>
-      </DashboardHeader>
+      </PageHeader>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -51,6 +50,6 @@ export default async function DepartmentPage({
           </CardHeader>
         </Card>
       </div>
-    </DashboardShell>
+    </PageShell>
   );
 }

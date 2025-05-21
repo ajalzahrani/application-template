@@ -29,8 +29,6 @@ import { AlertCircle, ArrowLeft } from "lucide-react";
 import { createPermission } from "@/actions/permissions";
 import { type PermissionFormValues } from "@/actions/permissions.validation";
 import { useToast } from "@/components/ui/use-toast";
-import { PageShell } from "@/components/page-shell";
-import { PageHeader } from "@/components/page-header";
 
 // Form schema for new permission
 const permissionFormSchema = z.object({
@@ -91,15 +89,16 @@ export default function NewPermissionPage() {
   };
 
   return (
-    <PageShell>
-      <PageHeader heading="Create New Permission">
+    <div className="container mx-auto py-10 space-y-6">
+      <div className="flex items-center space-x-2">
         <Button
           variant="outline"
           size="icon"
           onClick={() => router.push("/permissions")}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
-      </PageHeader>
+        <h1 className="text-3xl font-bold">Create New Permission</h1>
+      </div>
 
       {error && (
         <Alert variant="destructive">
@@ -193,6 +192,6 @@ export default function NewPermissionPage() {
           </Form>
         </CardContent>
       </Card>
-    </PageShell>
+    </div>
   );
 }
