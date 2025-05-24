@@ -62,3 +62,68 @@ model Department {
   name  String @unique
   users User[]
 }
+
+model Employee {
+  id            String    @id @default(uuid())
+  employeeNo    String
+  firstName     String
+  secondName    String?
+  thirdName     String?
+  lastName      String
+  gender        String    @default("Male") // Male - female
+  dob           DateTime?
+  citizenship   String // Civilian - Foreigner
+  nationalityId String
+  noriqama      String // NationNo or IqamaNo
+  mrn           String?
+  unitId        String?
+  rankId        String?
+  jobTitleId    String?
+  sponsorId     String?
+  pictureLink   String?
+  cardExpiryAt  DateTime
+  lastRenewalAt DateTime?
+  isActive      Boolean   @default(true)
+
+  // relations
+  nationality Nationality @relation(fields: [nationalityId], references: [id])
+  unit        Unit?       @relation(fields: [unitId], references: [id])
+  rank        Rank?       @relation(fields: [rankId], references: [id])
+  sponsor     Sponsor?    @relation(fields: [sponsorId], references: [id])
+  jobTitle    JobTitle?   @relation(fields: [jobTitleId], references: [id])
+}
+
+model Nationality {
+  id     String   @id @default(uuid())
+  nameEn String?
+  nameAr String
+  employee Employee[]
+}
+
+model Unit {
+  id     String   @id @default(uuid())
+  nameEn String?
+  nameAr String
+  employee Employee[]
+}
+
+model Rank {
+  id     String   @id @default(uuid())
+  nameEn String?
+  nameAr String
+  employee Employee[]
+}
+
+model Sponsor {
+  id     String   @id @default(uuid())
+  nameEn String?
+  nameAr String
+  employee Employee[]
+}
+
+model JobTitle {
+  id     String   @id @default(uuid())
+  nameEn String?
+  nameAr String
+  employee Employee[]
+}
