@@ -84,6 +84,76 @@ async function main() {
     },
   });
 
+  const nationalities = [
+    {
+      nameEn: "Saudi",
+      nameAr: "سعودي",
+    },
+    {
+      nameEn: "Egyptian",
+      nameAr: "مصري",
+    },
+    {
+      nameEn: "American",
+      nameAr: "أمريكي",
+    },
+    {
+      nameEn: "Indian",
+      nameAr: "هندي",
+    },
+  ];
+
+  console.log("Creating nationalities...");
+  const createdNationalities = [];
+
+  for (const nationality of nationalities) {
+    const createdNationality = await prisma.nationality.upsert({
+      where: { nameAr: nationality.nameAr },
+      update: nationality,
+      create: nationality,
+    });
+    createdNationalities.push(createdNationality);
+  }
+
+  console.log("Nationalities created successfully");
+
+  const jobTitles = [
+    {
+      nameEn: "Software Engineer",
+      nameAr: "مهندس برمجيات",
+    },
+    {
+      nameEn: "Network Engineer",
+      nameAr: "مهندس شبكة",
+    },
+    {
+      nameEn: "Database Administrator",
+      nameAr: "مدير قاعدة البيانات",
+    },
+    {
+      nameEn: "System Administrator",
+      nameAr: "مدير النظام",
+    },
+    {
+      nameEn: "IT Manager",
+      nameAr: "مدير التكنولوجيا",
+    },
+  ];
+
+  console.log("Creating job titles...");
+  const createdJobTitles = [];
+
+  for (const jobTitle of jobTitles) {
+    const createdJobTitle = await prisma.jobTitle.upsert({
+      where: { nameAr: jobTitle.nameAr },
+      update: jobTitle,
+      create: jobTitle,
+    });
+    createdJobTitles.push(createdJobTitle);
+  }
+
+  console.log("Job titles created successfully");
+
   const permissions = [
     // Admin permissions
     {

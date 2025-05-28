@@ -94,36 +94,36 @@ model Employee {
 }
 
 model Nationality {
-  id     String   @id @default(uuid())
-  nameEn String?
-  nameAr String
+  id       String     @id @default(uuid())
+  nameEn   String?
+  nameAr   String     @unique
   employee Employee[]
 }
 
 model Unit {
-  id     String   @id @default(uuid())
-  nameEn String?
-  nameAr String
+  id       String     @id @default(uuid())
+  nameEn   String?
+  nameAr   String     @unique
   employee Employee[]
 }
 
 model Rank {
-  id     String   @id @default(uuid())
-  nameEn String?
-  nameAr String
+  id       String     @id @default(uuid())
+  nameEn   String?
+  nameAr   String     @unique
   employee Employee[]
 }
 
 model Sponsor {
-  id     String   @id @default(uuid())
-  nameEn String?
-  nameAr String
+  id       String     @id @default(uuid())
+  nameEn   String?
+  nameAr   String     @unique
   employee Employee[]
 }
 
 model JobTitle {
-  id     String   @id @default(uuid())
-  nameEn String?
-  nameAr String
+  id       String     @id @default(uuid())
+  nameEn   String?
+  nameAr   String     @unique
   employee Employee[]
 }
