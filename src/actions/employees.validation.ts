@@ -3,9 +3,7 @@ import { z } from "zod";
 // Permission schema for validation
 export const employeeSchema = z.object({
   id: z.string().optional(),
-  employeeNo: z
-    .string()
-    .min(6, "Employee number must be at least 6 characters"),
+  employeeNo: z.string().optional().nullable(),
   firstName: z.string().min(2, "First name is required"),
   secondName: z.string().optional(),
   thirdName: z.string().optional().nullable(),

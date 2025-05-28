@@ -63,6 +63,21 @@ export async function getEmployeeById(employeeId: string) {
   }
 }
 
+export async function generateEmployeeNo() {
+  const lastEmployee = await prisma.employee.findFirst({
+    orderBy: { employeeNo: "desc" },
+  });
+
+  if (!lastEmployee) {
+    return "000001";
+  }
+
+  const lastEmployeeNo = lastEmployee.employeeNo;
+  const lastEmployeeNoInt = parseInt(lastEmployeeNo);
+  const newEmployeeNo = (lastEmployeeNoInt + 1).toString().padStart(6, "0");
+  return newEmployeeNo;
+}
+
 /**
  * Upload a file to the server
  */
@@ -149,7 +164,7 @@ export async function createEmployee(formData: FormData) {
         citizenship: employeeData.citizenship,
         noriqama: employeeData.noriqama,
         mrn: employeeData.mrn,
-        employeeNo: employeeData.employeeNo,
+        employeeNo: await generateEmployeeNo(),
         nationality: {
           connect: { id: employeeData.nationalityId },
         },
