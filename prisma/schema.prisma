@@ -25,6 +25,10 @@ model User {
   roleId       String
   department   Department? @relation(fields: [departmentId], references: [id])
   role         Role        @relation(fields: [roleId], references: [id])
+
+  // Notification relations
+  notificationPreferences NotificationPreference[]
+  notifications           Notification[]
 }
 
 model Role {
@@ -126,4 +130,48 @@ model JobTitle {
   nameEn   String?
   nameAr   String     @unique
   employee Employee[]
+}
+
+// Notification settings per user
+model NotificationPreference {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  enabled        Boolean  @default(true)
+  channel        NotificationChannel
+  severityLevels String[] // Array of severity IDs the user wants to be notified about
+  incidents  String[] // Array of incident IDs the user wants to be notified about
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum NotificationChannel {
+  EMAIL
+  MOBILE
+  BOTH
+}
+
+// Sent notifications log
+model Notification {
+  id           String               @id @default(uuid())
+  userId       String
+  user         User                 @relation(fields: [userId], references: [id])
+  title        String
+  message      String
+  type         NotificationType
+  channel      NotificationChannel
+  read         Boolean              @default(false)
+  referenceIds String[]             // Store IDs of related entities (occurrences, referrals)
+  createdAt    DateTime             @default(now())
+  metadata     Json?                // Additional context data
+}
+
+enum NotificationType {
+  OCCURRENCE_CREATED
+  OCCURRENCE_UPDATED
+  HIGH_SEVERITY
+  REFERRAL
+  ASSIGNMENT
+  FEEDBACK
 }
