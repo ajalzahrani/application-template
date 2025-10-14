@@ -4,27 +4,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, ArrowLeft, Building2, Link } from "lucide-react";
+import { ArrowLeft, Building2, Key, Link, RotateCcw } from "lucide-react";
 import { createUser } from "@/actions/users";
 import { getRoles } from "@/actions/roles";
 import { getDepartments } from "@/actions/departments";
@@ -210,20 +192,67 @@ export default function NewUserPage() {
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              {...register("password")}
-              placeholder="Enter new password (leave blank to keep current)"
-              className="mt-1"
-            />
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.password.message}
-              </p>
-            )}
+          <div className="space-y-2 flex items-center  gap-2">
+            <div className="space-y-2 w-full">
+              <Label htmlFor="password">Set Password</Label>
+              <Input
+                id="password"
+                type="password"
+                {...register("password")}
+                placeholder="Enter new password"
+                className="mt-1"
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <p className="text-sm text-muted-foreground">OR</p>
+
+            <div className="space-y-2">
+              <Label>Set Default Password</Label>
+              <div className="flex items-center gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    const defaultPassword = "password123";
+                    setValue("password", defaultPassword);
+                    toast({
+                      title: "Password Set",
+                      description:
+                        "Default password has been set. User should change it on first login.",
+                    });
+                  }}
+                  className="flex items-center gap-2">
+                  <Key className="h-4 w-4" />
+                  Set Default Password
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setValue("password", "");
+                    toast({
+                      title: "Password Cleared",
+                      description:
+                        "Password field has been cleared. Current password will be kept.",
+                    });
+                  }}
+                  className="flex items-center gap-2">
+                  <RotateCcw className="h-4 w-4" />
+                  Clear
+                </Button>
+              </div>
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
           </div>
 
           <Separator />
