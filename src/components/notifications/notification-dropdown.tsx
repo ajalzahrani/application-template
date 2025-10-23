@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { Notification, NotificationType } from "@prisma/client";
+import { Notification, NotificationType } from "@/generated/prisma";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import {

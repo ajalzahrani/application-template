@@ -15,6 +15,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { NotificationDropdown } from "@/components/notifications/notification-dropdown";
+
 export function UserNav() {
   const { data: session } = useSession();
 
