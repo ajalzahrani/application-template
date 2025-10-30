@@ -5,6 +5,7 @@ import { NAV_ITEMS } from "@/config/nav.config";
 import { hasPermission } from "@/lib/permissions"; // permissions helper
 import { getCurrentUser } from "@/lib/auth";
 import NavList from "./nav-list";
+import { APP_NAME } from "@/config/app-spec";
 export async function MainNav() {
   const session = await getCurrentUser();
 
@@ -37,7 +38,7 @@ export async function MainNav() {
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
         <Shield className="h-6 w-6" />
-        <span className="font-bold inline-block">Application Template</span>
+        <span className="font-bold inline-block">{APP_NAME}</span>
       </Link>
       <nav className="flex gap-6 items-center">
         <NavList items={visibleItems} />

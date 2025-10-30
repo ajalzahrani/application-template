@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-
+import { APP_NAME } from "@/config/app-spec";
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -73,7 +73,7 @@ export default function LoginPage() {
     <div className="flex h-[calc(100vh-4rem)] items-center justify-center bg-gray-50 dark:bg-gray-900">
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">OVA System</CardTitle>
+          <CardTitle className="text-2xl font-bold">{APP_NAME}</CardTitle>
           <CardDescription>
             Enter your credentials to sign in to your account
           </CardDescription>

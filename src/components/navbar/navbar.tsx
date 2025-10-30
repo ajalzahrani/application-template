@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { ShieldAlert } from "lucide-react";
-
+import { APP_NAME } from "@/config/app-spec";
 export async function Navbar() {
   const session = await getServerSession(authOptions);
 
@@ -14,7 +14,7 @@ export async function Navbar() {
         <div className="container mx-auto max-w-screen-xl flex h-14 items-center justify-between px-4">
           <div className="flex items-center space-x-2">
             <ShieldAlert className="h-6 w-6" />
-            <h1 className="text-xl font-bold">Application Template</h1>
+            <h1 className="text-xl font-bold">{APP_NAME}</h1>
           </div>
         </div>
       </header>

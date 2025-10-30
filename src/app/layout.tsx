@@ -7,9 +7,9 @@ import "./globals.css";
 import { AuthProvider } from "@/providers/auth-provider";
 import { Navbar } from "@/components/navbar/navbar";
 const inter = Inter({ subsets: ["latin"] });
-
+import { APP_NAME } from "@/config/app-spec";
 export const metadata: Metadata = {
-  title: "Application Template",
+  title: APP_NAME,
   description: "Clone this template to create your own application",
 };
 
